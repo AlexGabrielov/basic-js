@@ -1,11 +1,11 @@
 module.exports = class DepthCalculator {
-  calculateDepth(arr) {
-    let depth = 1
-    for (let e in arr) {
-      if (Array.isArray(e)) {
-        return  Math.max(this.calculateDepth(e), depth)
-      } else return 0;
+  calculateDepth(arr) { 
+
+        const innerDepths = arr.filter(Array.isArray).map(e => {
+            const depth  = this.calculateDepth(e);
+            return depth;
+        })
+
+        return innerDepths.length ? Math.max(...innerDepths) + 1 : 1;
     }
-    return depth
-  }
 }
